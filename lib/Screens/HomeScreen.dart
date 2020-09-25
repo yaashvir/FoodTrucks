@@ -41,12 +41,6 @@ class HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  @override
-  void didUpdateWidget(HomeScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    getFoodtrucks();
-  }
-
   getFoodtrucks() async {
     foodTrucks = await Repository().getFoodTrucks();
     buildMarkers();
@@ -307,7 +301,9 @@ class HomeScreenState extends State<HomeScreen> {
           foodTruck: foodTruck,
         ),
       ),
-    );
+    ).then((_) {
+      getFoodtrucks();
+    });
   }
 
   goToAllListScreen() async {
@@ -318,6 +314,8 @@ class HomeScreenState extends State<HomeScreen> {
           foodTrucks: foodTrucks,
         ),
       ),
-    );
+    ).then((_) {
+      getFoodtrucks();
+    });
   }
 }

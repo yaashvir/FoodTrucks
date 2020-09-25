@@ -249,7 +249,13 @@ class FoodTrucksListScreenState extends State<FoodTrucksListScreen> {
               setState(() {
                 selectedType = types[index];
                 filteredFoodTrucks = widget.foodTrucks
-                    .where((item) => item.type == selectedType)
+                    .where((item){
+                      if (selectedType == "Any") {
+                        return true;
+                      } else {
+                         return item.type == selectedType;
+                      }
+                    })
                     .toList();
               });
             },
